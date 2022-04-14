@@ -1,39 +1,51 @@
 import autopy
 import random
 import time
+import pickle
+from configure_auto_search import configure
 
 SEARCHES = 50
 
-def main(): 
+
+def main():
+
+	# Load configuration
+	try:
+		with open("configuration.pckl", "rb") as f:
+			values = pickle.load(f)
+		print("Configuration successfully loaded!")
+	except FileNotFoundError:
+		print("Unable to find configuration file. Running configuration now...")
+		values = configure()
 
 	# Move mouse to wake up laptop
 	autopy.mouse.move(100,100)
 	autopy.mouse.move(200,200)
-	time.sleep(10)
+	time.sleep(1)
 	print("Starting searches")
 
     # Click on Microsoft Edge
-	result = click_on_edge()
-	print("Clicked on Edge")
+	result = click(values["icon_x"], values["icon_y"])
+	print("Clicked on Browser")
 	if result == 1:
 		print("Ending")
 		return
 		
-	time.sleep(25)
+	time.sleep(1)
 
 	for i in range(0,SEARCHES):
 
         # Click on search bar
-		click_on_searchbar()
+		click(values["bar_x"], values["bar_y"])
 
 		# enter random words
 		autopy.key.type_string(random_search(), wpm=2000)
 		autopy.key.tap(autopy.key.Code.RETURN)
 
-		time.sleep(3)
+		time.sleep(1)
 
-	print("Searches complete. Minimizing Edge")
-	click_on_edge()
+	print("Searches complete. Minimizing Browser")
+	click(values["icon_x"], values["icon_y"])
 	
 
 def random_search():
@@ -51,16 +63,10 @@ def random_search():
 
     return ran_search
 
-def click_on_edge():
-	print("In click on edge function")
-	autopy.mouse.move(355,745)
+def click(x,y):
+	autopy.mouse.move(x,y)
 	autopy.mouse.click()
 
-def click_on_searchbar():
-    autopy.mouse.move(500,50)
-    autopy.mouse.click()
-    
 
 if __name__ == "__main__":
     main()
-        
