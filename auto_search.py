@@ -35,12 +35,17 @@ def main():
 
 	for i in range(0,SEARCHES):
 
-        # Click on search bar
+		# Click on search bar
+		print("Beginning search number {}".format(i))
 		click(values["bar_x"], values["bar_y"])
-
+		print("Clicked on search bar")
 		# enter random words
-		autopy.key.type_string(random_search(), wpm=2000)
+		search = random_search()
+		print("Entering search: {}".format(search))
+		autopy.key.type_string(search, wpm=2000)
+		print("Typed Search")
 		autopy.key.tap(autopy.key.Code.RETURN)
+		print("Pressed Enter")
 
 		time.sleep(1)
 
@@ -52,7 +57,7 @@ def random_search():
     # List of random words to search
     words = ["movies", "best", "worst", "and", "actors", "games", "top 10",
              "of 2000s", "shows","tv shows","songs","singers","artists",
-             "shaimus", "recipes", "food", "2010's", "1990's", "funny",
+             "shaimus", "recipes", "food", "2010s", "1990s", "funny",
              "cats","dogs","hamsters","video games"]
 
     search_count = random.randint(1,5)
@@ -64,8 +69,11 @@ def random_search():
     return ran_search
 
 def click(x,y):
+	print("Moving mouse to {},{}".format(x,y))
 	autopy.mouse.move(x,y)
+	print("Moved")
 	autopy.mouse.click()
+	print("Clicked")
 
 
 if __name__ == "__main__":
