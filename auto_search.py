@@ -42,7 +42,7 @@ def main():
 		autopy.key.type_string(random_search(), wpm=2000)
 		autopy.key.tap(autopy.key.Code.RETURN)
 
-		time.sleep(1)
+		time.sleep(20)
 
 	print("Searches complete. Minimizing Browser")
 	click(values["icon_x"], values["icon_y"])
