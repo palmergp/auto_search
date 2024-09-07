@@ -36,12 +36,17 @@ def main():
 
 	for i in range(0,SEARCHES):
 
-        # Click on search bar
+		# Click on search bar
+		print("Beginning search number {}".format(i))
 		click(values["bar_x"], values["bar_y"])
-
+		print("Clicked on search bar")
 		# enter random words
-		autopy.key.type_string(random_search(), wpm=2000)
+		search = random_search()
+		print("Entering search: {}".format(search))
+		autopy.key.type_string(search, wpm=2000)
+		print("Typed Search")
 		autopy.key.tap(autopy.key.Code.RETURN)
+		print("Pressed Enter")
 
 		time.sleep(random.randint(20,65))
 
@@ -50,6 +55,7 @@ def main():
 	
 
 def random_search():
+<<<<<<< HEAD
 	# List of random words to search
 	words = ["movies", "best", "worst", "and", "actors", "games", "top 10",
 			 "of 2000s", "shows","tv shows","songs","singers","artists",
@@ -59,6 +65,13 @@ def random_search():
 		# Do a search for a random zip code weather
 		zipcode = random.randint(501, 99950)
 		ran_search = f"weather in {zipcode}"
+=======
+    # List of random words to search
+    words = ["movies", "best", "worst", "and", "actors", "games", "top 10",
+             "of 2000s", "shows","tv shows","songs","singers","artists",
+             "shaimus", "recipes", "food", "2010s", "1990s", "funny",
+             "cats","dogs","hamsters","video games"]
+>>>>>>> c93fc06c1c1669eb9582b1c869d7226d2c75c014
 
 	else:
 		search_count = random.randint(1,5)
@@ -71,8 +84,11 @@ def random_search():
 	return ran_search
 
 def click(x,y):
+	print("Moving mouse to {},{}".format(x,y))
 	autopy.mouse.move(x,y)
+	print("Moved")
 	autopy.mouse.click()
+	print("Clicked")
 
 
 if __name__ == "__main__":
